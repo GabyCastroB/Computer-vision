@@ -50,6 +50,7 @@ Ejemplo de anotación:
 ```txt
 [class_id] [x_center] [y_center] [width] [height]
 3 0.512 0.624 0.214 0.198
+```
 
 ## 🖼️ Ejemplo visual (imagen + caja delimitadora)
 
@@ -97,19 +98,24 @@ Se utilizó **YOLOv5** por su rapidez y precisión en tiempo real.
 # Clonar repositorio de YOLOv5
 !git clone https://github.com/ultralytics/yolov5  
 %cd yolov5
+```
 
 # Instalar dependencias
+```
 !pip install -r requirements.txt
-
+```
 # Entrenamiento del modelo
+```
 !python train.py --img 416 --batch 16 --epochs 80 --data data.yaml --weights yolov5s.pt
-
 !git clone https://github.com/ultralytics/yolov5  
 %cd yolov5
 !pip install -r requirements.txt
+```
 
 # Entrenamiento
+```
 !python train.py --img 416 --batch 16 --epochs 80 --data data.yaml --weights yolov5s.pt
+```
 
 ## 📊 Evaluación de Resultados  
 
