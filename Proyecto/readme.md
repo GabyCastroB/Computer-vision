@@ -1,98 +1,98 @@
-# 👁️‍🗨️ Visión por Computadora para la Movilidad de Personas Invidentes en Ciudades  
+# 👁️‍🗨️ Computer Vision for Mobility Assistance of Visually Impaired People in Cities
 
-Este proyecto fue desarrollado en el curso **Visión de Máquina** de la Universidad Nacional de Colombia.  
-El objetivo principal es implementar un sistema de **detección y clasificación de objetos urbanos** que apoye la movilidad de personas con discapacidad visual, usando **redes neuronales convolucionales** y **procesamiento de imágenes**.  
-
----
-
-## 📌 Resumen  
-El proyecto consiste en el desarrollo de un software basado en **YOLOv5** entrenado sobre un dataset urbano (CARLA Dataset), con el fin de identificar objetos clave en entornos de ciudad:  
-
-- 🚦 Semáforos (rojo, amarillo, verde)  
-- 🚸 Pasos peatonales  
-- 🚗 Vehículos  
-- 🚲 Bicicletas  
-- 🏍️ Motocicletas  
-- 🚷 Señales de tránsito (30km, 60km, 90km)  
-- 🚶 Personas  
-
-El sistema procesa imágenes, detecta los objetos y comunica la información de manera que sirva de apoyo a personas con discapacidad visual.
+This project was developed for the Machine Vision course at the National University of Colombia.
+The main goal is to implement a system for the detection and classification of urban objects to support the mobility of people with visual impairments, using convolutional neural networks and image processing.  
 
 ---
 
-## 🎯 Alcance  
-- El modelo está diseñado para **entornos urbanos**: calles, andenes, puentes, etc.  
-- Se centra en objetos clave para la movilidad segura.  
-- Considera variaciones de iluminación y horarios (día/noche).  
+## 📌 Summary  
+The project consists of software based on YOLOv5 trained on an urban dataset (CARLA Dataset) to identify key objects in city environments:
+
+- 🚦 Traffic lights (red, yellow, green)  
+- 🚸 Crosswalks  
+- 🚗 Vehicles  
+- 🚲 Bicycles  
+- 🏍️ Motorcycles  
+- 🚷 Traffic signs (30 km/h, 60 km/h, 90 km/h) 
+- 🚶 Pedestrians  
+
+The system processes images, detects objects, and communicates the information in a way that can assist people with visual disabilities.
 
 ---
 
-## ⚙️ Herramientas y Tecnologías  
+## 🎯 Scope  
+- The model is designed for urban environments: streets, sidewalks, bridges, etc. 
+- It focuses on objects that are critical for safe mobility.  
+- It considers variations in lighting and time of day (day/night).
 
-- **Lenguaje principal**: Python 🐍  
-- **Frameworks de Deep Learning**: [PyTorch](https://pytorch.org/) + [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5)  
-- **Entorno de ejecución**: Google Colab  
-- **Gestión de experimentos**: Comet.ml  
+---
+
+## ⚙️ Tools and Technologies 
+
+- **Primary language**: Python 🐍  
+- **Deep Learning frameworks**: [PyTorch](https://pytorch.org/) + [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5)  
+- **Execution environment**: Google Colab  
+- **Experiment tracking**: Comet.ml  
 - **Datasets**:  
-  - [COCO](https://cocodataset.org) (referencia inicial)  
-  - [CARLA Dataset](https://www.kaggle.com/datasets/) (final, optimizado para tráfico y señales)  
+  - [COCO](https://cocodataset.org) (initial reference)  
+  - [CARLA Dataset](https://www.kaggle.com/datasets/) (final, optimized for traffic and signs)  
 
 ---
 
-## 🗂️ Base de Datos  
+## 🗂️ Dataset  
 
 - **CARLA Dataset** (103 MB)  
 - 10 clases de objetos relevantes para movilidad en ciudad.  
-- Incluye anotaciones detalladas con **bounding boxes** y segmentación semántica.  
+- Includes detailed annotations with bounding boxes and semantic segmentation.  
 
-Ejemplo de anotación:  
+Annotation example:  
 
 ```txt
 [class_id] [x_center] [y_center] [width] [height]
 3 0.512 0.624 0.214 0.198
 ```
 
-## 🖼️ Ejemplo visual (imagen + caja delimitadora)
+## 🖼️ Visual example (image + bounding box)
 
-Ejemplo de anotación y detección en el dataset:
+Example of annotation and detection in the dataset:
 
-![Ejemplo dataset](docs/img/dataset_example.png)
+![Dataset example](docs/img/dataset_example.png)
 
 ---
 
-## 🛠️ Preprocesamiento de Imágenes  
+## 🛠️ Image Preprocessing
 
-Se aplicaron las siguientes transformaciones antes de entrenar el modelo:  
+The following transformations were applied before training the model:
 
-- Conversión a **escala de grises**.  
-- Redimensionamiento a **416x416 píxeles**.  
-- Normalización de píxeles en rango `[0,1]`.  
-- Normalización de **bounding boxes** al formato YOLO.  
-- Aplicación de **filtro Gaussiano** para reducción de ruido.  
+- Conversion to grayscale.  
+- Resizing to 416×416 pixels.  
+- Pixel normalization to the range [0, 1]. 
+- Normalization of bounding boxes to YOLO format.  
+- Application of a Gaussian filter for noise reduction.  
 
-### Ejemplo:
+### Example:
 
-| Imagen original | Imagen preprocesada |
+|  Original image | Preprocessed image |
 |-----------------|----------------------|
-| ![original](docs/img/original.png) | ![preprocesada](docs/img/preprocessed.png) |
+| ![original](docs/img/original.png) | ![Preprocessed](docs/img/preprocessed.png) |
 
 ---
 
-## 🤖 Algoritmo de Detección  
+## 🤖 Detection Algorithm 
 
-Se utilizó **YOLOv5** por su rapidez y precisión en tiempo real.  
+YOLOv5 was chosen for its real-time speed and accuracy.
 
-### Parámetros de entrenamiento  
+### Training parameters  
 
-- 📷 **Imágenes de entrenamiento**: 1600  
-- 🧪 **Imágenes de validación**: 263  
+- 📷 **Training images**: 1600  
+- 🧪 **Validation images**: 263  
 - 📦 **Batch size**: 16  
 - 🔁 **Epochs**: 80  
 - 🏷️ **Clases**: 10  
 
 ---
 
-### 🚀 Ejemplo de entrenamiento en Google Colab  
+### 🚀 Example training commands for Google Colab
 
 ```python
 # Clonar repositorio de YOLOv5
@@ -100,11 +100,11 @@ Se utilizó **YOLOv5** por su rapidez y precisión en tiempo real.
 %cd yolov5
 ```
 
-# Instalar dependencias
+# Install dependencies
 ```
 !pip install -r requirements.txt
 ```
-# Entrenamiento del modelo
+# Train the model
 ```
 !python train.py --img 416 --batch 16 --epochs 80 --data data.yaml --weights yolov5s.pt
 !git clone https://github.com/ultralytics/yolov5  
@@ -112,72 +112,72 @@ Se utilizó **YOLOv5** por su rapidez y precisión en tiempo real.
 !pip install -r requirements.txt
 ```
 
-# Entrenamiento
+# Training
 ```
 !python train.py --img 416 --batch 16 --epochs 80 --data data.yaml --weights yolov5s.pt
 ```
 
-## 📊 Evaluación de Resultados  
+## 📊 Evaluation Results 
 
-### 🔹 Métricas clave  
+### 🔹 Key metrics  
 
 - **mAP@0.5** ≈ 0.80  
 - **mAP@0.95** ≈ 0.65  
 - **Precision** ≈ 0.98  
-- **Recall** ≈ 0.38 *(afectado por la perspectiva y la cantidad de ejemplos)*  
+- **Recall** ≈ 0.38 *(affected by perspective and number of examples)*  
 
-📌 Ejemplo de matriz de confusión:  
+📌 Example confusion matrix:  
 
-![Matriz de confusión](docs/img/confusion_matrix.png)  
-
----
-
-### 🔹 Pérdida durante el entrenamiento  
-
-- **Box loss, Obj loss y Cls loss** tienden a **cero** ✅  
-- Buen equilibrio entre **precisión y recall**  
-
-![Resultados entrenamiento](docs/img/train_results.png)  
+![Confusion matrix](docs/img/confusion_matrix.png)  
 
 ---
 
-## 🔍 Resultados de Predicción  
+### 🔹 Training loss
 
-El modelo mostró muy buena precisión en condiciones estándar:  
+- **Box loss, Obj loss y Cls loss** trend towards zero ✅  
+- Good balance between precision and recall 
 
-| Detección de señales de tránsito y semáforo | Detección de vehículos y peatones |
+![Training results](docs/img/train_results.png)  
+
+---
+
+## 🔍 Prediction Results
+
+The model showed very good precision in standard conditions:
+
+|   Traffic sign & traffic light detection    |   Vehicle & pedestrian detection |
 |---------------------------------------------|----------------------------------|
-| ![predicción1](docs/img/prediction1.png)    | ![predicción2](docs/img/prediction2.png) |
+|  ![Prediction](docs/img/prediction1.png)    | ![Prediction2](docs/img/prediction2.png) |
 
-⚠️ En casos de **cambios de perspectiva** (ej. señales vistas de lado), la detección disminuye.  
+⚠️ Detection performance decreases in extreme perspective changes (e.g., signs seen from the side).
 
-📹 **Videos de prueba (diurnos y nocturnos):**  
+📹 **Test videos (day and night):**  
 - [Video 1](https://drive.google.com/file/d/1dYb0MZngtYF1aOs30iyHLgBVDCjSrcGb/view?usp=drive_link)  
 - [Video 2](https://drive.google.com/file/d/1JtuEliXzeGDHh7GctchF1vozcavJTgXZ/view?usp=drive_link)  
-- [Video nocturno](https://drive.google.com/file/d/1w4rRBnKMhH7vylNyhGoPzUjA0EoiaMLA/view?usp=drive_link)  
+- [Night Video](https://drive.google.com/file/d/1w4rRBnKMhH7vylNyhGoPzUjA0EoiaMLA/view?usp=drive_link)  
 
 ---
 
-## ✅ Conclusiones  
+## ✅ Conclusions  
 
-- El **preprocesamiento de imágenes** es clave para reducir el tamaño y mejorar la eficiencia.  
-- El modelo es **preciso**, pero pierde robustez ante variaciones de perspectiva.  
-- Los resultados sugieren un buen desempeño general, pero requieren:  
-  - Más datos en diferentes ángulos e iluminación.  
-  - Ajustar umbrales de decisión para balancear precisión y recall.  
-
----
-
-## 🔮 Trabajo Futuro  
-
-- Ampliar el dataset con más condiciones (**clima, noche, distintas perspectivas**).  
-- Entrenar con más clases y escenarios complejos.  
-- Implementar **aprendizaje continuo** para que el sistema se adapte con nuevos datos.  
-- Integrar **salida auditiva en tiempo real** para asistencia directa.  
+- Image preprocessing is essential to reduce input size and improve efficiency.  
+- The model is accurate, but loses robustness under perspective variation.  
+- Results indicate good overall performance, but improvements are needed:  
+  - More data across different angles and lighting conditions.  
+  - Tuning decision thresholds to balance precision and recall.
 
 ---
 
-## 👨‍💻 Autores  
+## 🔮 Future Work
+
+- Expand the dataset with more conditions (weather, night, different perspectives).  
+- Train with additional classes and more complex scenarios.  
+- Implement continual learning so the system adapts to new data. 
+- Integrate real-time audio output to provide direct assistance
+
+---
+
+## 👨‍💻 Authors  
 
 - **Juan Nicolás Carvajal Useche**  
 - **Gabriela María Castro Beltrán**  
